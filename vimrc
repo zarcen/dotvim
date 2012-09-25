@@ -1,17 +1,12 @@
+call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
+
 " If no screen, use color term
 if ($TERM == "vt100")
   " xterm-color / screen
   set t_Co=8
   set t_AF=^[[1;3%p1%dm
   set t_AB=^[[4%p1%dm
-endif
-
-if filereadable($VIMRUNTIME . "/vimrc_example.vim")
- so $VIMRUNTIME/vimrc_example.vim
-endif
-
-if filereadable($VIMRUNTIME . "/macros/matchit.vim")
- so $VIMRUNTIME/macros/matchit.vim
 endif
 
 syntax on
@@ -99,3 +94,5 @@ if has("autocmd")
    autocmd Filetype java setlocal omnifunc=javacomplete#Complete
 endif 
 " end of Java auto complete
+
+
