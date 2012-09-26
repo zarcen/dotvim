@@ -1,18 +1,17 @@
+" The following two lines invoke pathogen plugin
+" The pathogen plugin makes it possible 
+" to cleanly install plugins as a bundle.
+" every bundle now is a independent dir like ~/.vim/bundle/xxx
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 
-" If no screen, use color term
-if ($TERM == "vt100")
-  " xterm-color / screen
-  set t_Co=8
-  set t_AF=^[[1;3%p1%dm
-  set t_AB=^[[4%p1%dm
-endif
-
+" -----------------------------------------
 " General Settings
+" -----------------------------------------
 
 " auto reload vimrc when editing it
 autocmd! bufwritepost .vimrc source ~/.vimrc
+autocmd! bufwritepost vimrc source ~/.vimrc
 
 set nocompatible	" not compatible with the old-fashion vi mode
 set nu	" show the line number; use [set nonu] to close
@@ -20,6 +19,8 @@ set bs=2		" allow backspacing over everything in insert mode
 set history=50		" keep 50 lines of command line history
 set ruler		" show the cursor position all the time
 set autoread		" auto read when file is changed from outside
+set linespace=2
+set paste               " when paste from other source, do not auto comment  
 
 "Restore cursor to file position in previous editing session
 set viminfo='10,\"100,:20,%,n~/.viminfo
@@ -30,19 +31,21 @@ filetype on           " Enable filetype detection
 filetype indent on    " Enable filetype-specific indenting
 filetype plugin on    " Enable filetype-specific plugins
 
+set t_Co=256            " 256 color mode
+colorscheme railscasts  " My colorschem setting
+highlight CursorLine	guibg=#003853 ctermbg=24  gui=none cterm=none
 " ---- Mainly for MacVim ----
 if has("gui_running")	" GUI color and font settings
-   set guifont=Osaka-Mono:h20
+   colorscheme railscasts  " My colorschem setting
+   set guifont=Monaco:h18
    "set background=dark 
-   set t_Co=256          " 256 color mode
    set cursorline        " highlight current line
-   highlight CursorLine	guibg=#003853 ctermbg=24  gui=none cterm=none
-   colorscheme evening  " My colorschem setting
    " make transparent(for macvim)
-   set transparency=15
+   set transparency=20
    "set guioptions=aAce
+   set guioptions=ce
    " macvim window size
-   set lines=35
+   set lines=30
    set columns=100
 endif
 " ---------------------------
@@ -73,11 +76,11 @@ set t_vb=
 set tm=500
 
 " TAB setting{
-	set softtabstop=3	" the tab space size=4
-	set shiftwidth=3	" the autoindenting space size=4
-   	set expandtab        "replace <TAB> with spaces
+set softtabstop=3	" the tab space size=4
+set shiftwidth=3	" the autoindenting space size=4
+set expandtab        "replace <TAB> with spaces
 
-   au FileType Makefile set noexpandtab
+au FileType Makefile set noexpandtab
 "}
 
 
@@ -88,6 +91,9 @@ set tm=500
 let mapleader=","
 let g:mapleader=","
 
+" select ALL
+map <C-A> ggVG
+
 " open the error console
 map <leader>cc :botright cope<CR> 
 " move to next error
@@ -95,17 +101,30 @@ map <leader>] :cn<CR>
 " move to the prev error
 map <leader>[ :cp<CR>
 
+" show the current line by underlined cursor
+map <F4> :set invcursorline<CR>
+
 " Bash like keys for the command line
 cnoremap <C-A>    <Home>
 cnoremap <C-E>    <End>
 cnoremap <C-K>    <C-U>
 
+" NERDTreeTabsToggle bind to <F2>
+map <F2> :NERDTreeTabsToggle<CR>
+" NERDTreeToggle bind to <F3>
+map <F3> :NERDTreeToggle<CR>
+"map <leader>n :NERDTreeTabsToggle<CR>
+
+"
 " Tab key binding
 " new tab
-map <C-t><C-t> :tabnew<CR>
+map gn :tabnew<CR>
 " close tab
-map <C-t><C-w> :tabclose<CR> 
-map <F4> :set invcursorline<CR>
+map gc :tabclose<CR> 
+" go to next tab (default gt)
+map gt :tabn<CR>
+" go to previous tab (default gT)
+map gT :tabp<CR>
 
 map g1 :tabn 1<CR>
 map g2 :tabn 2<CR>
@@ -117,10 +136,6 @@ map g7 :tabn 7<CR>
 map g8 :tabn 8<CR>
 map g9 :tabn 9<CR>
 map g0 :tabn 10<CR>
-" go to next tab (default gt)
-map gn :tabn<CR>
-" go to previous tab (default gT)
-map gp :tabp<CR>
 
 "--------------------------------------------------------------------------- 
 " PROGRAMMING SHORTCUTS
@@ -147,9 +162,9 @@ if has("autocmd") && exists("+omnifunc")
             \endif
 endif
 
-"--------------------------------------------------------------------------- 
+"----------------------------------------------------------------------- 
 " ENCODING SETTINGS
-"--------------------------------------------------------------------------- 
+"----------------------------------------------------------------------- 
 set encoding=utf-8                                  
 set termencoding=utf-8
 set fileencoding=utf-8
@@ -171,3 +186,10 @@ fun! Big5()
 	set encoding=big5
 	set fileencoding=big5
 endfun
+
+"----------------------------------------------------------------------- 
+" PLUGINS
+"-----------------------------------------------------------------------
+
+" ctrlp
+set runtimepath^=~/.vim/bundle/ctrlp.vim

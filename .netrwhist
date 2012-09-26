@@ -1,8 +1,9 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =6
+let g:netrw_dirhist_cnt =7
 let g:netrw_dirhist_1='/Users/zarcen/.macports'
 let g:netrw_dirhist_2='/Users/zarcen/.macports/opt'
 let g:netrw_dirhist_3='/opt/local/etc/macports'
 let g:netrw_dirhist_4='/Users/zarcen/workspace/Ruby/testing_ofc_2/app/views/test_it'
 let g:netrw_dirhist_5='/Users/zarcen/workspace/stomp-php-1.0.0/Stomp'
 let g:netrw_dirhist_6='/Users/zarcen/.vim/.git/info'
+let g:netrw_dirhist_7='/Users/zarcen/workspace/mchess/src'
