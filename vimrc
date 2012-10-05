@@ -9,6 +9,10 @@ call pathogen#helptags()
 " General Settings
 " -----------------------------------------
 
+" set leader to ,
+let mapleader=","
+let g:mapleader=","
+
 " Use the damn hjkl keys
 map <up> <nop>
 map <down> <nop>
@@ -19,8 +23,9 @@ map <right> <nop>
 "imap <left> <nop>
 "imap <right> <nop>
 
-" use <C-G> to get normal mode in insert mode
-imap <C-G> <Esc>
+" use <,,> to get normal mode in insert mode
+map <leader>, <Esc>
+
 " auto reload vimrc when editing it
 autocmd! bufwritepost .vimrc source ~/.vimrc
 autocmd! bufwritepost vimrc source ~/.vimrc
@@ -102,19 +107,16 @@ au FileType Makefile set noexpandtab
 " select ALL
 map <C-A> ggVG
 
-" set leader to ,
-let mapleader=","
-let g:mapleader=","
-
 " for copy from another source, like `pbcopy`
 "" when paste from other source, do not auto comment or {} 
-map <leader>p :set paste 
+nmap <leader>p :set paste<CR>
+nmap <leader>np :set nopaste<CR>
 " open the error console
-map <leader>cc :botright cope<CR> 
+nmap <leader>cc :botright cope<CR> 
 " move to next error
-map <leader>] :cn<CR>
+nmap <leader>] :cn<CR>
 " move to the prev error
-map <leader>[ :cp<CR>
+nmap <leader>[ :cp<CR>
 
 " show the current line by underlined cursor
 map <F4> :set invcursorline<CR>
@@ -214,7 +216,8 @@ map <F2> <Esc>:NERDTreeTabsToggle<CR>
 "map <leader>n :NERDTreeTabsToggle<CR>
 
 " ctrlp
-set runtimepath^=~/.vim/bundle/ctrlp.vim
+"set runtimepath^=~/.vim/bundle/ctrlp.vim
+
 
 " ctags
 
@@ -256,3 +259,15 @@ function! Do_Tlist_Toggle()
    TlistToggle
    TlistUpdate
 endfunction
+
+"------------------------
+" Self-Defined Function--
+" -----------------------
+
+" auto add python header when edit a new blank .py files
+function! PyHeader()
+   if getfsize(@%) <= 0
+      execute "norm i#!/usr/bin/env python\n# -*- coding: utf-8 -*-\n"
+   endif
+endfunction
+au BufRead,BufNewFile *.py call PyHeader()
