@@ -4,7 +4,6 @@
 " every bundle now is a independent dir like ~/.vim/bundle/xxx
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
-
 " -----------------------------------------
 " General Settings
 " -----------------------------------------
@@ -22,9 +21,6 @@ map <right> <nop>
 "imap <down> <nop>
 "imap <left> <nop>
 "imap <right> <nop>
-
-" use <,,> to get normal mode in insert mode
-map <leader>, <Esc>
 
 " auto reload vimrc when editing it
 autocmd! bufwritepost .vimrc source ~/.vimrc
@@ -93,8 +89,8 @@ set t_vb=
 set tm=500
 
 " TAB setting{
-set softtabstop=3	" the tab space size=4
-set shiftwidth=3	" the autoindenting space size=4
+set softtabstop=2	" the default tab space size=4
+set shiftwidth=2	" the default autoindenting space size=4
 set expandtab        "replace <TAB> with spaces
 
 au FileType Makefile set noexpandtab
@@ -105,26 +101,24 @@ au FileType Makefile set noexpandtab
 "--------------------------------------------------------------------------- 
 
 " select ALL
-map <C-A> ggVG
-
+map <leader>a ggVG
 " for copy from another source, like `pbcopy`
 "" when paste from other source, do not auto comment or {} 
-nmap <leader>p :set paste<CR>
-nmap <leader>np :set nopaste<CR>
+nmap <leader>p <Esc>:set paste<CR>
+nmap <leader>np <Esc>:set nopaste<CR>
 " open the error console
 nmap <leader>cc :botright cope<CR> 
 " move to next error
 nmap <leader>] :cn<CR>
 " move to the prev error
 nmap <leader>[ :cp<CR>
-
 " show the current line by underlined cursor
-map <F4> :set invcursorline<CR>
+nmap <leader>i <Esc>:set invcursorline<CR>
 
 " Bash like keys for the command line
-cnoremap <C-A>    <Home>
-cnoremap <C-E>    <End>
-cnoremap <C-K>    <C-U>
+cmap <C-A> <Home>
+cmap <C-E> <End>
+cmap <C-K> <C-U>
 
 "
 " Tab key binding
@@ -136,7 +130,6 @@ map gc :tabclose<CR>
 "map gt :tabn<CR>
 " go to previous tab (default gT)
 "map gT :tabp<CR>
-
 map g1 :tabn 1<CR>
 map g2 :tabn 2<CR>
 map g3 :tabn 3<CR>
@@ -168,7 +161,7 @@ if has("autocmd")
    autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 endif
 " in MacVim, when type '.' show the omni complete list
-autocmd Filetype java,javascript,jsp inoremap <buffer>  .  .<C-X><C-O><C-P><down>
+"autocmd Filetype java,javascript,jsp inoremap <buffer>  .  .<C-X><C-O><C-P><down>
 
 " use syntax complete if nothing else available
 if has("autocmd") && exists("+omnifunc")
@@ -217,10 +210,9 @@ map <F2> <Esc>:NERDTreeTabsToggle<CR>
 
 " ctrlp
 "set runtimepath^=~/.vim/bundle/ctrlp.vim
-
+map <leader>e <Esc>:CtrlP 
 
 " ctags
-
 "------Make sure use <F5> before change to source root dir!!-----
 " use <F5>(means:new tags) to generate a file 'tags', which originally 
 " should be generate by command `ctags -R` at (src/project) root dir
@@ -259,6 +251,23 @@ function! Do_Tlist_Toggle()
    TlistToggle
    TlistUpdate
 endfunction
+
+" neocomplcache
+" <F4> to toggle open/close completion
+let g:neocomplcache_enable_at_startup = 1
+nmap <F4> :NeoComplCacheToggle<CR>
+imap <F4> <Esc>:NeoComplCacheToggle<CR>a
+
+" EasyGrep
+" <leader>vv - Grep for the word under the cursor
+" <leader>va - Like vv, but add to existing list
+" <leader>vo - Select the files to search in and set grep options
+" <Leader>vr - Perform a global search search on the word under the cursor
+"              and prompt for a pattern with which to replace it.
+map <leader>vf <esc>:Grep 
+let g:EasyGrepRecursive = 1
+let g:EasyGrepCommand = 1
+let g:EasyGrepIgnoreCase = 1
 
 "------------------------
 " Self-Defined Function--

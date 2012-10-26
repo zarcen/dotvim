@@ -19,3 +19,6 @@
 [submodule "bundle/neocomplcache"]
 	path = bundle/neocomplcache
 	url = https://github.com/Shougo/neocomplcache.git
+[submodule "bundle/rubycomplete"]
+	path = bundle/rubycomplete
+	url = https://github.com/vim-scripts/rubycomplete.vim.git
