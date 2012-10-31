@@ -272,7 +272,6 @@ let g:EasyGrepIgnoreCase = 1
 "------------------------
 " Self-Defined Function--
 " -----------------------
-
 " auto add python header when edit a new blank .py files
 function! PyHeader()
    if getfsize(@%) <= 0
