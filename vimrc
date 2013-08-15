@@ -1,9 +1,33 @@
-" The following two lines invoke pathogen plugin
-" The pathogen plugin makes it possible 
-" to cleanly install plugins as a bundle.
-" every bundle now is a independent dir like ~/.vim/bundle/xxx
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
+set nocompatible    " be iMproved(not vi mode)
+filetype off    " required! for Vundle
+
+"---Let Vundle manage vundle: Vundle is a fancy vim plugin manager
+"  help you easily manage(install, update, and remove) your 
+"  vim plugin(or so-called bundle)
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+" The following line is required! for Vundle
+Bundle 'gmarik/vundle'
+filetype plugin indent on "required!
+" My Bundles here:
+"
+" original repos on github
+Bundle 'jistr/vim-nerdtree-tabs'
+Bundle 'scrooloose/nerdtree'
+Bundle 'kien/ctrlp'
+Bundle 'Yggdroot/indentLine'
+Bundle 'Lokaltog/vim-easymotion'
+Bundle 'Valloric/YouCompleteMe'
+Bundle 'scrooloose/syntastic'
+" vim-scripts repos
+Bundle 'javacomplete'
+Bundle 'rubycomplete'
+Bundle 'ctags'
+Bundle 'EasyGrep'
+Bundle 'taglist'
+" non github repos
+"Bundle 'git://git.wincent.com/command-t.git'
+
 " -----------------------------------------
 " General Settings
 " -----------------------------------------
@@ -27,7 +51,8 @@ autocmd! bufwritepost .vimrc source ~/.vimrc
 autocmd! bufwritepost vimrc source ~/.vimrc
 
 set nocompatible	" not compatible with the old-fashion vi mode
-set nu	                " show the line number; use [set nonu] to close
+set nu	                " show the line number; use [set nonu] to close;
+" use [set rnu] to show relative line number
 set bs=2		" allow backspacing over everything in insert mode
 set history=50		" keep 50 lines of command line history
 set ruler		" show the cursor position all the time
@@ -52,15 +77,15 @@ set cursorline          " highlight current line
 set invcursorline
 " ---- Mainly for MacVim ----
 if has("gui_running")	" GUI color and font settings
-   set guifont=Monaco:h18
-   set cursorline       " highlight current line
-   " make transparent(for macvim)
-   set transparency=15
-   "set guioptions=aAce
-   set guioptions=aAce
-   " macvim window size
-   set lines=32
-   set columns=128
+    set guifont=Monaco:h18
+    set cursorline       " highlight current line
+    " make transparent(for macvim)
+    set transparency=15
+    "set guioptions=aAce
+    set guioptions=aAce
+    " macvim window size
+    set lines=32
+    set columns=128
 endif
 " ---------------------------
 
@@ -89,9 +114,9 @@ set t_vb=
 set tm=500
 
 " TAB setting{
-set softtabstop=2	" the default tab space size=4
-set shiftwidth=2	" the default autoindenting space size=4
-set expandtab        "replace <TAB> with spaces
+set softtabstop=4	" the default tab space size=4
+set shiftwidth=4	" the default autoindenting space size=4
+set expandtab	        " replace <TAB> with spaces
 
 au FileType Makefile set noexpandtab
 "}
@@ -121,7 +146,7 @@ cmap <C-E> <End>
 cmap <C-K> <C-U>
 
 "
-" Tab key binding
+" Tab pages key binding
 " new tab
 map gn :tabnew<CR>
 " close tab
@@ -146,30 +171,24 @@ map g0 :tabn 10<CR>
 "--------------------------------------------------------------------------- 
 
 " { } completement
-autocmd FileType java,c,cpp imap {<CR> {<CR><END><CR>}<UP><END>
+autocmd FileType java,c,cpp,rb imap {<CR> {<CR><END><CR>}<UP><END>
 
 " Enable omni completion. (default: <C-X><C-O>; my:<C-X><C-X>)
 inoremap <C-X><C-X> <C-X><C-O><C-P>
 if has("autocmd")
-   autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-   autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-   autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-   autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-   autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-   autocmd FileType c setlocal omnifunc=ccomplete#Complete
-   autocmd Filetype java setlocal omnifunc=javacomplete#Complete
-   autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+    "autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+    "autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+    "autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+    "autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+    "autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+    "autocmd FileType c setlocal omnifunc=ccomplete#Complete
+    autocmd Filetype java setlocal omnifunc=javacomplete#Complete
+    autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 endif
+" ### the following is deprecated because YCM(YouCompleteMe) plugin already ###
+" ### implement the function ###
 " in MacVim, when type '.' show the omni complete list
 "autocmd Filetype java,javascript,jsp inoremap <buffer>  .  .<C-X><C-O><C-P><down>
-
-" use syntax complete if nothing else available
-if has("autocmd") && exists("+omnifunc")
-   autocmd Filetype *
-            \if &omnifunc == "" |
-            \  setlocal omnifunc=syntaxcomplete#Complete |
-            \endif
-endif
 
 "----------------------------------------------------------------------- 
 " ENCODING SETTINGS
@@ -180,28 +199,32 @@ set fileencoding=utf-8
 set fileencodings=ucs-bom,utf-8,big5,gb2312,latin1
 
 fun! ViewUTF8()
-   set encoding=utf-8                                  
-   set termencoding=big5
+    set encoding=utf-8                                  
+    set termencoding=big5
 endfun
 
 fun! UTF8()
-   set encoding=utf-8                                  
-   set termencoding=big5
-   set fileencoding=utf-8
-   set fileencodings=ucs-bom,big5,utf-8,latin1
+    set encoding=utf-8                                  
+    set termencoding=big5
+    set fileencoding=utf-8
+    set fileencodings=ucs-bom,big5,utf-8,latin1
 endfun
 
 fun! Big5()
-   set encoding=big5
-   set fileencoding=big5
+    set encoding=big5
+    set fileencoding=big5
 endfun
 
 "----------------------------------------------------------------------- 
 " PLUGINS
 "-----------------------------------------------------------------------
 
+" --- YCM(YouCompleteMe)---
+let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
+" -------------------------
+
 " don't open nerdtree_tabs when gvim/macvim open; otherwise, 1
-let g:nerdtree_tabs_open_on_gui_startup = 1
+let g:nerdtree_tabs_open_on_gui_startup = 0
 " NERDTreeTabsToggle bind to <F2>
 map <F2> <Esc>:NERDTreeTabsToggle<CR>
 " NERDTreeToggle bind to <F2>
@@ -222,20 +245,20 @@ set tags=~/.vim/bundle/ctags/tags;
 " nmap <C-]> viwy:tab tag <C-R>"<CR>
 
 function! Do_NewTags()
-   " delete the current tags in the dir 
-   if filereadable("~/.vim/bundle/ctags/tags")
-      let tagsdeleted=delete("~/.vim/bundle/ctags/"."tags")
-      if(tagsdeleted!=0)
-         echohl WarningMsg | echo "Fail to do tags! I cannot delete the tags" | echohl None
-         return
-      endif
-   endif
+    " delete the current tags in the dir 
+    if filereadable("~/.vim/bundle/ctags/tags")
+        let tagsdeleted=delete("~/.vim/bundle/ctags/"."tags")
+        if(tagsdeleted!=0)
+            echohl WarningMsg | echo "Fail to do tags! I cannot delete the tags" | echohl None
+            return
+        endif
+    endif
 
-   " generate a new tag files to ~/.vim/ctags/tags
-   if(executable('ctags'))
-      "silent! execute '!ctags -R --c-types=+p --fields=+S *'
-      exec "!ctags -R --c++-kinds=+lpx --java-kinds=+l --fields=+iaS --extra=+q -f $HOME/.vim/bundle/ctags/tags `pwd`"
-   endif
+    " generate a new tag files to ~/.vim/ctags/tags
+    if(executable('ctags'))
+        "silent! execute '!ctags -R --c-types=+p --fields=+S *'
+        exec "!ctags -R --c++-kinds=+lpx --java-kinds=+l --fields=+iaS --extra=+q -f $HOME/.vim/bundle/ctags/tags `pwd`"
+    endif
 endfunction
 
 
@@ -246,17 +269,11 @@ let Tlist_Show_One_File=1       " only show current file's tags
 let Tlist_File_Fold_Auto_Close=1 "files' tags are folded except current one
 let Tlist_Sort_Type="name"      " tags will be sorted by name; default is by occurence
 let Tlist_Exit_OnlyWindow=1     " exit vim when taglist is the last window
-map <F3> : call Do_Tlist_Toggle()<CR>
+nmap <F3> : call Do_Tlist_Toggle()<CR>
 function! Do_Tlist_Toggle() 
-   TlistToggle
-   TlistUpdate
+    TlistToggle
+    TlistUpdate
 endfunction
-
-" neocomplcache
-" <F4> to toggle open/close completion
-let g:neocomplcache_enable_at_startup = 1
-nmap <F4> :NeoComplCacheToggle<CR>
-imap <F4> <Esc>:NeoComplCacheToggle<CR>a
 
 " EasyGrep
 " <leader>vv - Grep for the word under the cursor
@@ -269,13 +286,19 @@ let g:EasyGrepRecursive = 1
 let g:EasyGrepCommand = 1
 let g:EasyGrepIgnoreCase = 1
 
+" IndentLine
+" default: not enabled
+let b:indentLine_enabled = 0
+" to open/close the indentLine function
+nmap <leader>l :IndentLinesToggle<CR>
+
 "------------------------
 " Self-Defined Function--
 " -----------------------
 " auto add python header when edit a new blank .py files
 function! PyHeader()
-   if getfsize(@%) <= 0
-      execute "norm i#!/usr/bin/env python\n# -*- coding: utf-8 -*-\n"
-   endif
+    if getfsize(@%) <= 0
+        execute "norm i#!/usr/bin/env python\n# -*- coding: utf-8 -*-\n"
+    endif
 endfunction
 au BufRead,BufNewFile *.py call PyHeader()
