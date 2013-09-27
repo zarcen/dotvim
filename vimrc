@@ -15,10 +15,11 @@ filetype plugin indent on "required!
 Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'scrooloose/nerdtree'
 Bundle 'kien/ctrlp'
-Bundle 'Yggdroot/indentLine'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'scrooloose/syntastic'
+       "used for toggle compilation error window
+Bundle 'Valloric/ListToggle'
 " vim-scripts repos
 Bundle 'javacomplete'
 Bundle 'rubycomplete'
@@ -181,10 +182,11 @@ if has("autocmd")
     "autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
     "autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
     "autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-    "autocmd FileType c setlocal omnifunc=ccomplete#Complete
+    autocmd FileType c setlocal omnifunc=ccomplete#Complete
     autocmd Filetype java setlocal omnifunc=javacomplete#Complete
     autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 endif
+let b:classpath="./*"
 " ### the following is deprecated because YCM(YouCompleteMe) plugin already ###
 " ### implement the function ###
 " in MacVim, when type '.' show the omni complete list
@@ -220,9 +222,23 @@ endfun
 "-----------------------------------------------------------------------
 
 " --- YCM(YouCompleteMe)---
+" the flowing line enable YCM to do powful C++ completion funtionality
+" by loading cpp completion model
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
+" If prefer the completion tip window to close when a selection is
+" made, these lines close it on movement in insert mode or when leaving
+" insert mode
+autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 " -------------------------
 
+" --- ListToggle ----------
+let g:lt_location_list_toggle_map = '<leader>w'
+let g:lt_quickfix_list_toggle_map = '<leader>q'
+let g:lt_height = 10
+" -------------------------
+
+" --- NERDTree & NERDTreeTabs----
 " don't open nerdtree_tabs when gvim/macvim open; otherwise, 1
 let g:nerdtree_tabs_open_on_gui_startup = 0
 " NERDTreeTabsToggle bind to <F2>
@@ -230,13 +246,15 @@ map <F2> <Esc>:NERDTreeTabsToggle<CR>
 " NERDTreeToggle bind to <F2>
 "map <F2> :NERDTreeToggle<CR>
 "map <leader>n :NERDTreeTabsToggle<CR>
+" -------------------------
 
-" ctrlp
+" --- ctrlp ---------------
 "set runtimepath^=~/.vim/bundle/ctrlp.vim
 map <leader>e <Esc>:CtrlP 
+" -------------------------
 
-" ctags
-"------Make sure use <F5> before change to source root dir!!-----
+" --- ctags ---------------
+" !!!Make sure use <F5> before change to source root dir!!!-----
 " use <F5>(means:new tags) to generate a file 'tags', which originally 
 " should be generate by command `ctags -R` at (src/project) root dir
 map <F5> :call Do_NewTags()<CR>
@@ -260,9 +278,9 @@ function! Do_NewTags()
         exec "!ctags -R --c++-kinds=+lpx --java-kinds=+l --fields=+iaS --extra=+q -f $HOME/.vim/bundle/ctags/tags `pwd`"
     endif
 endfunction
+" -------------------------
 
-
-" taglist
+" --- taglist -------------
 let Tlist_Use_Horiz_Window=0
 let Tlist_Use_Right_Window=1    " window is show at right-side
 let Tlist_Show_One_File=1       " only show current file's tags
@@ -274,8 +292,9 @@ function! Do_Tlist_Toggle()
     TlistToggle
     TlistUpdate
 endfunction
+" -------------------------
 
-" EasyGrep
+" --- EasyGrep ------------
 " <leader>vv - Grep for the word under the cursor
 " <leader>va - Like vv, but add to existing list
 " <leader>vo - Select the files to search in and set grep options
@@ -286,11 +305,6 @@ let g:EasyGrepRecursive = 1
 let g:EasyGrepCommand = 1
 let g:EasyGrepIgnoreCase = 1
 
-" IndentLine
-" default: not enabled
-let b:indentLine_enabled = 0
-" to open/close the indentLine function
-nmap <leader>l :IndentLinesToggle<CR>
 
 "------------------------
 " Self-Defined Function--
@@ -302,3 +316,4 @@ function! PyHeader()
     endif
 endfunction
 au BufRead,BufNewFile *.py call PyHeader()
+
