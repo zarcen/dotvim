@@ -40,7 +40,7 @@ You should see the following message:
       ...
 
 And then install the plugins (you can remove plugins that you don't like)
-    ![](http://imgur.com/W9XlccI)
+    ![](http://i.imgur.com/W9XlccI.png)
 
 Everything's done! Hope you enjoy it.
 
