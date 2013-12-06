@@ -73,3 +73,4 @@ Detect the compilation error while editing by [syntastic](https://github.com/scr
 Todo
 ====
 - Friendly explanation about the .vimrc 
+- FAQ
