@@ -1,9 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =7
-let g:netrw_dirhist_1='/Users/zarcen/.vim/.git'
-let g:netrw_dirhist_2='/Users/zarcen/workspace/mchess/src'
-let g:netrw_dirhist_3='/Users/zarcen/.m2'
-let g:netrw_dirhist_4='/Users/zarcen/workspace/activemq-5.7.0/webapps/demo/test'
-let g:netrw_dirhist_5='/Users/zarcen/.vim'
-let g:netrw_dirhist_6='/Users/zarcen/.emacs.d'
-let g:netrw_dirhist_7='/private/etc'

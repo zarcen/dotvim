@@ -1,11 +1,22 @@
 set nocompatible    " be iMproved(not vi mode)
 filetype off    " required! for Vundle
 
+" Setting up Vundle - the vim plugin bundler
 "---Let Vundle manage vundle: Vundle is a fancy vim plugin manager
 "  help you easily manage(install, update, and remove) your 
 "  vim plugin(or so-called bundle)
+let iCanHazVundle=1
+let vundle_readme=expand('~/.vim/bundle/vundle/README.md')
+if !filereadable(vundle_readme)
+  echo "Installing Vundle.."
+  echo ""
+  silent !mkdir -p ~/.vim/bundle
+  silent !git clone https://github.com/gmarik/vundle ~/.vim/bundle/vundle
+  let iCanHazVundle=0
+endif
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
+
 " The following line is required! for Vundle
 Bundle 'gmarik/vundle'
 filetype plugin indent on "required!
