@@ -1,8 +1,7 @@
-
 Introduction
 ============
 
-This is zarcen's vim configuration files, including '.vimrc' and '.gvimrc'.
+This is zarcen's vim configuration files, including '.vimrc' and '.gvimrc'.  
 Currently, the following plugin is used:
 
 - *(plugin name)* - *(its [github repos] or [vim-scripts repos])*
@@ -19,6 +18,12 @@ Currently, the following plugin is used:
 - YouCompleteMe - Valloric/YouCompleteMe
 - javacomplete - vim-scripts/javacomplete
 - rubycomplete - vim-scripts/rubycomplete
+
+I use the plugin 'vundle' to automatically manage/install/update/remove my vim's plugin,  
+For more details, refer to [vundle](https://github.com/gmarik/vundle)   
+or the kindly [introduction](http://blog.chh.tw/posts/vim-vundle/) written in Chinese.
+
+This configuration could be used for vim, MacVim, or gvim.
 
 Getting Started
 ===============
