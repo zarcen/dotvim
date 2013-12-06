@@ -92,7 +92,7 @@ if has("gui_running")	" GUI color and font settings
     set guifont=Monaco:h18
     set cursorline       " highlight current line
     " make transparent(for macvim)
-    set transparency=15
+    "set transparency=15
     "set guioptions=aAce
     set guioptions=aAce
     " macvim window size
