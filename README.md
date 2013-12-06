@@ -21,12 +21,26 @@ Currently, the following plugin is used:
 
 Getting Started
 ===============
-    
+
+First, obtain the .vim directory under your $HOME
+
     $ cd ~
     $ git clone https://github.com/zarcen/dotvim.git
     $ mv dotvim .vim # WARN: backup your own .vim directory if necessary
     $ ln -s ~/.vim/vimrc .vimrc  # for main vim settings
     $ ln -s ~/.vim/gvimrc .vimrc # for the gvim or macvim settings
 
+Now, simply open your vim:
 
+    $ vim
+
+You should see the following message:
+
+    $ Installing Vundle..
+      ...
+
+And then install the plugins (you can remove plugins that you don't like)
+    ![](http://imgur.com/W9XlccI)
+
+Everything's done! Hope you enjoy it.
 
