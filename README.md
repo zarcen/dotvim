@@ -70,4 +70,6 @@ Quickly find and open your file/directory by [ctrlp]()
 Detect the compilation error while editing by [syntastic](https://github.com/scrooloose/syntastic)
 ![](http://i.imgur.com/GRPwc2y.png)
 
-
+Todo
+====
+- Friendly explanation about the .vimrc 
