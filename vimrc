@@ -19,7 +19,7 @@ call vundle#rc()
 
 " The following line is required! for Vundle
 Bundle 'gmarik/vundle'
-filetype plugin indent on "required!
+filetype plugin indent on "required! for Vundle and completion function
 " My Bundles here:
 "
 " original repos on github
@@ -44,7 +44,7 @@ Bundle 'taglist'
 " General Settings
 " -----------------------------------------
 
-" set leader to ,
+" set <leader> to ','
 let mapleader=","
 let g:mapleader=","
 
@@ -71,6 +71,7 @@ set ruler		" show the cursor position all the time
 set autoread		" auto read when file is changed from outside
 set linespace=2         " a taller line
 set nowrap              " never auto change to next line
+set paste               " can use <Cmd>+v to paste in vim
 
 "Restore cursor to file position in previous editing session
 set viminfo='10,\"100,:20,%,n~/.viminfo
@@ -82,17 +83,17 @@ filetype indent on      " Enable filetype-specific indenting
 filetype plugin on      " Enable filetype-specific plugins
 
 set t_Co=256            " 256 color mode
-colorscheme desert      " My colorschem setting
-set background=dark     " another is 'light'
+"set background=dark    " another is 'light', change this will affect colorscheme
+colorscheme codeschool  " My colorschem setting
 highlight CursorLine guibg=#003853 ctermbg=24  gui=none cterm=none
 set cursorline          " highlight current line
 set invcursorline
 " ---- Mainly for MacVim ----
 if has("gui_running")	" GUI color and font settings
-    set guifont=Monaco:h18
+    set guifont=Monaco:h20
     set cursorline       " highlight current line
     " make transparent(for macvim)
-    "set transparency=15
+    set transparency=15
     "set guioptions=aAce
     set guioptions=aAce
     " macvim window size
@@ -107,7 +108,7 @@ set showmatch
 set showmode 
 
 " ignore these files while expanding wild chars
-set wildignore=*.o,*.class,*.pyc
+set wildignore=*.o,*.a,*.class,*.pyc
 
 set autoindent		" auto indentation
 set smartindent         " a improvement of autoindent
@@ -155,7 +156,7 @@ nmap <leader>i <Esc>:set invcursorline<CR>
 " Bash like keys for the command line
 cmap <C-A> <Home>
 cmap <C-E> <End>
-cmap <C-K> <C-U>
+cmap <C-K> <C-C>:
 
 "
 " Tab pages key binding
@@ -188,14 +189,14 @@ autocmd FileType java,c,cpp,rb imap {<CR> {<CR><END><CR>}<UP><END>
 " Enable omni completion. (default: <C-X><C-O>; my:<C-X><C-X>)
 inoremap <C-X><C-X> <C-X><C-O><C-P>
 if has("autocmd")
-    "autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-    "autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+    autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+    autocmd FileType html,javascript setlocal omnifunc=javascriptcomplete#CompleteJS
     "autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
     "autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
     "autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-    autocmd FileType c setlocal omnifunc=ccomplete#Complete
-    autocmd Filetype java setlocal omnifunc=javacomplete#Complete
-    autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+    "autocmd FileType c setlocal omnifunc=ccomplete#Complete
+    "autocmd Filetype java setlocal omnifunc=javacomplete#Complete
+    "autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 endif
 let b:classpath="./*"
 " ### the following is deprecated because YCM(YouCompleteMe) plugin already ###
@@ -232,15 +233,34 @@ endfun
 " PLUGINS
 "-----------------------------------------------------------------------
 
-" --- YCM(YouCompleteMe)---
+" --- YCM(YouCompleteMe) & eclim---
+" *** usage: use C-X C-X or C-<space> to trigger the completion ***
 " the flowing line enable YCM to do powful C++ completion funtionality
 " by loading cpp completion model
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
-" If prefer the completion tip window to close when a selection is
-" made, these lines close it on movement in insert mode or when leaving
-" insert mode
+" If you prefer the completion tip window to close when a selection is
+" made, these followint lines close it on movement in insert mode or
+" when leaving insert mode
 autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+let g:ycm_semantic_triggers =  {
+  \   'c' : ['->', '.'],
+  \   'objc' : ['->', '.'],
+  \   'ocaml' : ['.', '#'],
+  \   'cpp,objcpp' : ['->', '.', '::'],
+  \   'perl' : ['->'],
+  \   'php' : ['->', '::'],
+  \   'cs,java,javascript,d,vim,python,perl6,scala,vb,elixir,go' : ['.'],
+  \   'ruby' : ['.', '::'],
+  \   'lua' : ['.', ':'],
+  \   'erlang' : [':'],
+  \   'html' : ['.'],
+  \ }
+" The following is for eclim, This will make YCM and Eclim play nice; YCM will
+" use Eclim's omnifuncs as the data source for semantic completions and
+" provide the auto-triggering and subsequence-based matching (and other YCM
+" features) on top of it.
+let g:EclimCompletionMethod = 'omnifunc'
 " -------------------------
 
 " --- ListToggle ----------
@@ -250,7 +270,7 @@ let g:lt_height = 10
 " -------------------------
 
 " --- NERDTree & NERDTreeTabs----
-" don't open nerdtree_tabs when gvim/macvim open; otherwise, 1
+" don't open nerdtree_tabs when gvim/macvim open; otherwise, 0
 let g:nerdtree_tabs_open_on_gui_startup = 0
 " NERDTreeTabsToggle bind to <F2>
 map <F2> <Esc>:NERDTreeTabsToggle<CR>
@@ -261,7 +281,7 @@ map <F2> <Esc>:NERDTreeTabsToggle<CR>
 
 " --- ctrlp ---------------
 "set runtimepath^=~/.vim/bundle/ctrlp.vim
-map <leader>e <Esc>:CtrlP 
+map <leader>e <Esc>:CtrlP<CR>
 " -------------------------
 
 " --- ctags ---------------
