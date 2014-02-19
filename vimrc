@@ -1,3 +1,6 @@
+if $SHELL =~ 'bin/fish'
+  set shell=/bin/zsh
+endif
 set nocompatible    " be iMproved(not vi mode)
 filetype off    " required! for Vundle
 
@@ -25,18 +28,18 @@ filetype plugin indent on "required! for Vundle and completion function
 " original repos on github
 Bundle 'jistr/vim-nerdtree-tabs'
 Bundle 'scrooloose/nerdtree'
-Bundle 'kien/ctrlp'
+Bundle 'kien/ctrlp.vim'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'scrooloose/syntastic'
-       "used for toggle compilation error window
+"used for toggle compilation error window 
 Bundle 'Valloric/ListToggle'
 " vim-scripts repos
 Bundle 'javacomplete'
-Bundle 'rubycomplete'
-Bundle 'ctags'
-Bundle 'EasyGrep'
-Bundle 'taglist'
+Bundle 'rubycomplete.vim'
+Bundle 'ctags.vim'
+Bundle 'vim-scripts/EasyGrep'
+Bundle 'taglist.vim'
 " non github repos
 "Bundle 'git://git.wincent.com/command-t.git'
 
@@ -57,6 +60,9 @@ map <right> <nop>
 "imap <down> <nop>
 "imap <left> <nop>
 "imap <right> <nop>
+
+" enable the cmd+v to do 'system-copy' in terminal-vim
+vmap <C-c> y:call system(“pbcopy”, getreg(“\”“))<CR>
 
 " auto reload vimrc when editing it
 autocmd! bufwritepost .vimrc source ~/.vimrc
@@ -84,21 +90,22 @@ filetype plugin on      " Enable filetype-specific plugins
 
 set t_Co=256            " 256 color mode
 "set background=dark    " another is 'light', change this will affect colorscheme
-colorscheme codeschool  " My colorschem setting
+colorscheme codeschool " colorschem setting: solarized_dark, railscasts, distinguished
 highlight CursorLine guibg=#003853 ctermbg=24  gui=none cterm=none
 set cursorline          " highlight current line
 set invcursorline
 " ---- Mainly for MacVim ----
 if has("gui_running")	" GUI color and font settings
-    set guifont=Monaco:h20
-    set cursorline       " highlight current line
-    " make transparent(for macvim)
-    set transparency=15
-    "set guioptions=aAce
-    set guioptions=aAce
-    " macvim window size
-    set lines=32
-    set columns=128
+  colorscheme codeschool  " My colorschem setting
+  set guifont=Monaco:h20
+  set cursorline       " highlight current line
+  " make transparent(for macvim)
+  set transparency=15
+  "set guioptions=aAce
+  set guioptions=aAce
+  " macvim window size
+  set lines=32
+  set columns=128
 endif
 " ---------------------------
 
@@ -127,8 +134,8 @@ set t_vb=
 set tm=500
 
 " TAB setting{
-set softtabstop=4	" the default tab space size=4
-set shiftwidth=4	" the default autoindenting space size=4
+set softtabstop=2	" the default tab space size=4
+set shiftwidth=2	" the default autoindenting space size=4
 set expandtab	        " replace <TAB> with spaces
 
 au FileType Makefile set noexpandtab
@@ -184,19 +191,19 @@ map g0 :tabn 10<CR>
 "--------------------------------------------------------------------------- 
 
 " { } completement
-autocmd FileType java,c,cpp,rb imap {<CR> {<CR><END><CR>}<UP><END>
+autocmd FileType java,c,cpp,ruby,javascript imap {<CR> {<CR><END><CR>}<UP><END>
 
 " Enable omni completion. (default: <C-X><C-O>; my:<C-X><C-X>)
 inoremap <C-X><C-X> <C-X><C-O><C-P>
 if has("autocmd")
-    autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-    autocmd FileType html,javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-    "autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-    "autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-    "autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-    "autocmd FileType c setlocal omnifunc=ccomplete#Complete
-    "autocmd Filetype java setlocal omnifunc=javacomplete#Complete
-    "autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+  autocmd FileType html,javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+  "autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+  "autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+  "autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+  "autocmd FileType c setlocal omnifunc=ccomplete#Complete
+  "autocmd Filetype java setlocal omnifunc=javacomplete#Complete
+  "autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 endif
 let b:classpath="./*"
 " ### the following is deprecated because YCM(YouCompleteMe) plugin already ###
@@ -213,20 +220,20 @@ set fileencoding=utf-8
 set fileencodings=ucs-bom,utf-8,big5,gb2312,latin1
 
 fun! ViewUTF8()
-    set encoding=utf-8                                  
-    set termencoding=big5
+  set encoding=utf-8                                  
+  set termencoding=big5
 endfun
 
 fun! UTF8()
-    set encoding=utf-8                                  
-    set termencoding=big5
-    set fileencoding=utf-8
-    set fileencodings=ucs-bom,big5,utf-8,latin1
+  set encoding=utf-8                                  
+  set termencoding=big5
+  set fileencoding=utf-8
+  set fileencodings=ucs-bom,big5,utf-8,latin1
 endfun
 
 fun! Big5()
-    set encoding=big5
-    set fileencoding=big5
+  set encoding=big5
+  set fileencoding=big5
 endfun
 
 "----------------------------------------------------------------------- 
@@ -244,18 +251,18 @@ let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extr
 autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 let g:ycm_semantic_triggers =  {
-  \   'c' : ['->', '.'],
-  \   'objc' : ['->', '.'],
-  \   'ocaml' : ['.', '#'],
-  \   'cpp,objcpp' : ['->', '.', '::'],
-  \   'perl' : ['->'],
-  \   'php' : ['->', '::'],
-  \   'cs,java,javascript,d,vim,python,perl6,scala,vb,elixir,go' : ['.'],
-  \   'ruby' : ['.', '::'],
-  \   'lua' : ['.', ':'],
-  \   'erlang' : [':'],
-  \   'html' : ['.'],
-  \ }
+      \   'c' : ['->', '.'],
+      \   'objc' : ['->', '.'],
+      \   'ocaml' : ['.', '#'],
+      \   'cpp,objcpp' : ['->', '.', '::'],
+      \   'perl' : ['->'],
+      \   'php' : ['->', '::'],
+      \   'cs,java,javascript,d,vim,python,perl6,scala,vb,elixir,go' : ['.'],
+      \   'ruby' : ['.', '::'],
+      \   'lua' : ['.', ':'],
+      \   'erlang' : [':'],
+      \   'html' : ['.'],
+      \ }
 " The following is for eclim, This will make YCM and Eclim play nice; YCM will
 " use Eclim's omnifuncs as the data source for semantic completions and
 " provide the auto-triggering and subsequence-based matching (and other YCM
@@ -294,20 +301,20 @@ set tags=~/.vim/bundle/ctags/tags;
 " nmap <C-]> viwy:tab tag <C-R>"<CR>
 
 function! Do_NewTags()
-    " delete the current tags in the dir 
-    if filereadable("~/.vim/bundle/ctags/tags")
-        let tagsdeleted=delete("~/.vim/bundle/ctags/"."tags")
-        if(tagsdeleted!=0)
-            echohl WarningMsg | echo "Fail to do tags! I cannot delete the tags" | echohl None
-            return
-        endif
+  " delete the current tags in the dir 
+  if filereadable("~/.vim/bundle/ctags/tags")
+    let tagsdeleted=delete("~/.vim/bundle/ctags/"."tags")
+    if(tagsdeleted!=0)
+      echohl WarningMsg | echo "Fail to do tags! I cannot delete the tags" | echohl None
+      return
     endif
+  endif
 
-    " generate a new tag files to ~/.vim/ctags/tags
-    if(executable('ctags'))
-        "silent! execute '!ctags -R --c-types=+p --fields=+S *'
-        exec "!ctags -R --c++-kinds=+lpx --java-kinds=+l --fields=+iaS --extra=+q -f $HOME/.vim/bundle/ctags/tags `pwd`"
-    endif
+  " generate a new tag files to ~/.vim/ctags/tags
+  if(executable('ctags'))
+    "silent! execute '!ctags -R --c-types=+p --fields=+S *'
+    exec "!ctags -R --c++-kinds=+lpx --java-kinds=+l --fields=+iaS --extra=+q -f $HOME/.vim/bundle/ctags/tags `pwd`"
+  endif
 endfunction
 " -------------------------
 
@@ -320,8 +327,8 @@ let Tlist_Sort_Type="name"      " tags will be sorted by name; default is by occ
 let Tlist_Exit_OnlyWindow=1     " exit vim when taglist is the last window
 nmap <F3> : call Do_Tlist_Toggle()<CR>
 function! Do_Tlist_Toggle() 
-    TlistToggle
-    TlistUpdate
+  TlistToggle
+  TlistUpdate
 endfunction
 " -------------------------
 
@@ -342,9 +349,9 @@ let g:EasyGrepIgnoreCase = 1
 " -----------------------
 " auto add python header when edit a new blank .py files
 function! PyHeader()
-    if getfsize(@%) <= 0
-        execute "norm i#!/usr/bin/env python\n# -*- coding: utf-8 -*-\n"
-    endif
+  if getfsize(@%) <= 0
+    execute "norm i#!/usr/bin/env python\n# -*- coding: utf-8 -*-\n"
+  endif
 endfunction
 au BufRead,BufNewFile *.py call PyHeader()
 
