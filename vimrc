@@ -90,7 +90,7 @@ filetype plugin on      " Enable filetype-specific plugins
 
 set t_Co=256            " 256 color mode
 "set background=dark    " another is 'light', change this will affect colorscheme
-colorscheme codeschool " colorschem setting: solarized_dark, railscasts, distinguished
+colorscheme railscasts  " colorschem setting: solarized_dark, railscasts, distinguished
 highlight CursorLine guibg=#003853 ctermbg=24  gui=none cterm=none
 set cursorline          " highlight current line
 set invcursorline
