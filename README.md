@@ -6,19 +6,19 @@ This is my vim configuration files, the .vim directory.
 The following is the list of plugins currently used:
 
 - *(plugin name)* - *(its [github repos] or [vim-scripts repos])* | *description*
-- vundle - gmarik/vundle | plugin management tool
-- nerdtree - scrooloose/nerdtree | tree structure of quickly access filesystem
-- vim-nerdtree-tabs - jistr/vim-nerdtree-tabs | tabpage of nerdtree
-- taglist - vim-scripts/taglist | show tags (function definition, variable definition)
-- vim-easymotion - Lokaltog/vim-easymotion | a fantastic way of movement, quickly jumping to any location in the screen
-- syntastic - scrooloose/syntastic | show syntax error/warning
-- ctrlp - kien/ctrlp | quickly search/open file with fuzzy matching or regular expression
-- ctags - vim-scripts/ctags | necessary tool to do code tracing 
-- EasyGrep - vim-scripts/EasyGrep | fast and easy find and replace across multiple files 
-- ListToggle - Valloric/ListToggle | quick open/close the quickfix list in vim
-- YouCompleteMe - Valloric/YouCompleteMe | a powerful completion plugin for C-family language and Python
-- javacomplete - vim-scripts/javacomplete | java completion
-- rubycomplete - vim-scripts/rubycomplete | ruby completion
+- vundle - gmarik/vundle  **plugin management tool**
+- nerdtree - scrooloose/nerdtree  **tree structure of quickly access filesystem**
+- vim-nerdtree-tabs - jistr/vim-nerdtree-tabs  **tabpage of nerdtree**
+- taglist - vim-scripts/taglist  **show tags (function definition, variable definition)**
+- vim-easymotion - Lokaltog/vim-easymotion  **a fantastic way of movement, quickly jumping to any location in the screen**
+- syntastic - scrooloose/syntastic  **show syntax error/warning**
+- ctrlp - kien/ctrlp  **quickly search/open file with fuzzy matching or regular expression**
+- ctags - vim-scripts/ctags  **necessary tool to do code tracing**
+- EasyGrep - vim-scripts/EasyGrep  **fast and easy find and replace across multiple files**
+- ListToggle - Valloric/ListToggle  **quick open/close the quickfix list in vim**
+- YouCompleteMe - Valloric/YouCompleteMe  **a powerful completion plugin for C-family language and Python**
+- javacomplete - vim-scripts/javacomplete  **java completion**
+- rubycomplete - vim-scripts/rubycomplete  **ruby completion**
 
 I use the plugin 'vundle' to automatically manage/install/update/remove my vim's plugin,  
 For more details, refer to [vundle](https://github.com/gmarik/vundle)   
@@ -91,12 +91,12 @@ Detect the compilation error while editing by [syntastic](https://github.com/scr
 
 FAQ
 ===
-1. No completion / Error message of lacking python
+**No completion / Error message of lacking python**
 
 The completion feature is realized by the plugin [YouCompleteMe](https://github.com/Valloric/YouCompleteMe).
 However, it requires python installed on your environment first so that it can serve as the completion server.
 
-2. Why are my arrow keys (up, down, right, left) not working?
+**Why are my arrow keys (up, down, right, left) not working?**
 
 Hey, you are using Vim! You got to get used to 'hijk'!
 If you just start to learn it, it's the best to lock them and bear with only using 'hijk'.
@@ -107,11 +107,12 @@ If you really want to use them, you can unlock by comment these lines in vimrc:
     map <left> <nop>
     map <right> <nop>
 
-3. What is leader key in the configuration?
+**What is leader key in the configuration?**
  
     let mapleader=","
     let g:mapleader=","
 
+****
 
 
 Todo
