@@ -5,12 +5,12 @@ This is my vim configuration files, the .vim directory.
 
 The following is the list of plugins currently used:
 
-- *(plugin name)* - *(its [github repos] or [vim-scripts repos])* | *description*
-- vundle - gmarik/vundle 
+- *(plugin name)* - *(its [github repos] or [vim-scripts repos])* | **description**
+- vundle - gmarik/vundle  
 **plugin management tool**
 - nerdtree - scrooloose/nerdtree  
 **tree structure of quickly access filesystem**
-- vim-nerdtree-tabs - jistr/vim-nerdtree-tabs 
+- vim-nerdtree-tabs - jistr/vim-nerdtree-tabs  
 **tabpage of nerdtree**
 - taglist - vim-scripts/taglist  
 **show tags (function definition, variable definition)**
