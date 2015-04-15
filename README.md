@@ -5,20 +5,20 @@ This is my vim configuration files, the .vim directory.
 
 The following is the list of plugins currently used:
 
-- *(plugin name)* - *(its [github repos] or [vim-scripts repos])*
-- vundle - gmarik/vundle
-- nerdtree - scrooloose/nerdtree
-- vim-nerdtree-tabs - jistr/vim-nerdtree-tabs
-- taglist - vim-scripts/taglist
-- vim-easymotion - Lokaltog/vim-easymotion
-- syntastic - scrooloose/syntastic
-- ctrlp - kien/ctrlp
-- ctags - vim-scripts/ctags
-- EasyGrep - vim-scripts/EasyGrep
-- ListToggle - Valloric/ListToggle
-- YouCompleteMe - Valloric/YouCompleteMe
-- javacomplete - vim-scripts/javacomplete
-- rubycomplete - vim-scripts/rubycomplete
+- *(plugin name)* - *(its [github repos] or [vim-scripts repos])* | *description*
+- vundle - gmarik/vundle | plugin management tool
+- nerdtree - scrooloose/nerdtree | tree structure of quickly access filesystem
+- vim-nerdtree-tabs - jistr/vim-nerdtree-tabs | tabpage of nerdtree
+- taglist - vim-scripts/taglist | show tags (function definition, variable definition)
+- vim-easymotion - Lokaltog/vim-easymotion | a fantastic way of movement, quickly jumping to any location in the screen
+- syntastic - scrooloose/syntastic | show syntax error/warning
+- ctrlp - kien/ctrlp | quickly search/open file with fuzzy matching or regular expression
+- ctags - vim-scripts/ctags | necessary tool to do code tracing 
+- EasyGrep - vim-scripts/EasyGrep | fast and easy find and replace across multiple files 
+- ListToggle - Valloric/ListToggle | quick open/close the quickfix list in vim
+- YouCompleteMe - Valloric/YouCompleteMe | a powerful completion plugin for C-family language and Python
+- javacomplete - vim-scripts/javacomplete | java completion
+- rubycomplete - vim-scripts/rubycomplete | ruby completion
 
 I use the plugin 'vundle' to automatically manage/install/update/remove my vim's plugin,  
 For more details, refer to [vundle](https://github.com/gmarik/vundle)   
@@ -111,7 +111,9 @@ If you really want to use them, you can unlock by comment these lines in vimrc:
  
     let mapleader=","
     let g:mapleader=","
-    
+
+
+
 Todo
 ====
 - Friendly explanation about the .vimrc 
