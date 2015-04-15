@@ -47,6 +47,9 @@ Bundle 'taglist.vim'
 " General Settings
 " -----------------------------------------
 
+" enable mouse on terminal
+"set mouse=a
+
 " set <leader> to ','
 let mapleader=","
 let g:mapleader=","
@@ -118,14 +121,13 @@ set showmode
 set wildignore=*.o,*.a,*.class,*.pyc
 
 set autoindent		" auto indentation
-set smartindent         " a improvement of autoindent
+set smartindent     " a improvement of autoindent
 set copyindent		" copy the previous indentation on autoindenting
 set incsearch		" incremental search
 set nobackup		" no *~ backup files
 set ignorecase		" ignore case when searching
 set smartcase		" ignore case if search pattern is all lowercase,
 " case-sensitive otherwise
-set smarttab		" insert tabs on the start of a line according to context
 
 " disable sound on errors
 set noerrorbells
@@ -134,9 +136,11 @@ set t_vb=
 set tm=500
 
 " TAB setting{
-set softtabstop=2	" the default tab space size=4
-set shiftwidth=2	" the default autoindenting space size=4
-set expandtab	        " replace <TAB> with spaces
+set tabstop=4
+set softtabstop=4	" the default tab space size=4
+set shiftwidth=4	" the default autoindenting space size=4
+set expandtab	    " replace <TAB> with spaces
+set smarttab		" insert tabs on the start of a line according to context
 
 au FileType Makefile set noexpandtab
 "}
@@ -165,6 +169,13 @@ cmap <C-A> <Home>
 cmap <C-E> <End>
 cmap <C-K> <C-C>:
 
+" buffer switching key binding
+nmap gb :bn<CR>
+nmap gB :bp<CR>
+
+" split window key binding
+nmap gw :wincmd w<CR>
+nmap gW :wincmd W<CR>
 "
 " Tab pages key binding
 " new tab
