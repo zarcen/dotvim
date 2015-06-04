@@ -52,7 +52,7 @@ First, obtain the .vim directory under your $HOME
     $ git clone https://github.com/zarcen/dotvim.git
     $ mv dotvim .vim # WARN: backup your own .vim directory if necessary
     $ ln -s ~/.vim/vimrc .vimrc  # for main vim settings
-    $ ln -s ~/.vim/gvimrc .vimrc # for the gvim or macvim settings
+    $ ln -s ~/.vim/gvimrc .gvimrc # for the gvim or macvim settings
 
 Now, simply open your vim:
 
