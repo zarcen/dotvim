@@ -36,7 +36,7 @@ Bundle 'scrooloose/syntastic'
 Bundle 'Valloric/ListToggle'
 " vim-scripts repos
 Bundle 'javacomplete'
-Bundle 'rubycomplete.vim'
+"Bundle 'rubycomplete.vim'
 Bundle 'ctags.vim'
 Bundle 'vim-scripts/EasyGrep'
 Bundle 'taglist.vim'
@@ -72,7 +72,7 @@ autocmd! bufwritepost .vimrc source ~/.vimrc
 autocmd! bufwritepost vimrc source ~/.vimrc
 
 set nocompatible	" not compatible with the old-fashion vi mode
-set nu	                " show the line number; use [set nonu] to close;
+"set nu	                " show the line number; use [set nonu] to close;
 " use [set rnu] to show relative line number
 set bs=2		" allow backspacing over everything in insert mode
 set history=50		" keep 50 lines of command line history
